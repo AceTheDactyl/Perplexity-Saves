@@ -1,0 +1,21 @@
+# Pulse Chain Manifest for @@$Claude.Ace
+
+thread: @@$Claude.Ace
+created: 2025-12-19T10:34:00-08:00
+last_updated: 2025-12-19T10:34:00-08:00
+
+pulse_chain: []
+  # Pulses will be added here as emitted
+  # Format:
+  # - pulse_id: pulse_001
+  #   file: 2025-12-19_session1.json
+  #   timestamp: 2025-12-19T10:34:00-08:00
+  #   z_start: 0.30
+  #   z_end: 0.47
+  #   vaultnode: VN-GENESIS-001
+  #   parent: null
+
+chain_status:
+  total_pulses: 0
+  continuous: true
+  gaps_detected: []

@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+
+# Jupyter
+.ipynb_checkpoints
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Temporary
+*.log
+*.tmp
+/tmp/
+
+# Don't ignore pulse chain (we want to track these)
+!pulses/*.json
+!pulses/chain_manifest.yaml
+
+# Don't ignore VaultNodes
+!vaultnodes/*.md
+!vaultnodes/manifest.yaml
