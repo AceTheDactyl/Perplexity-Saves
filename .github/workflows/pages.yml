@@ -41,7 +41,6 @@ jobs:
           source: ./docs
           destination: ./_site
           future: false
-          build_args: --strict_front_matter
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
