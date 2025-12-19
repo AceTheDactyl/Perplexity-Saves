@@ -22,18 +22,24 @@ defaults:
     values:
       layout: pulse
 
-# Include directories
+# Include directories - CRITICAL: Include HTML files so they aren't deleted
 include:
   - _data
   - _includes
   - _layouts
   - assets
+  - vaultnode.html
+  - pulsechain.html
 
 # Exclude
 exclude:
   - scripts
   - .github
   - pulses
+  - node_modules
+  - vendor
+  - Gemfile
+  - Gemfile.lock
 
 # Data files
 data_dirs:
@@ -41,4 +47,7 @@ data_dirs:
 
 # Jekyll settings
 future: false
-strict_front_matter: true
+strict_front_matter: false
+
+# Permalink settings
+permalink: /:title/
