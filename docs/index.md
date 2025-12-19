@@ -35,11 +35,11 @@ title: Pulse Chain Architecture Dashboard
 ## Interactive Dashboards
 
 <div class="dashboard-links">
-  <a href="/Perplexity-Saves/vaultnode.html" class="dashboard-button vaultnode-btn">
+  <a href="/Perplexity-Saves/vaultnode.html" class="dashboard-button">
     <h3>🔍 VaultNode Inspector</h3>
     <p>View all VaultNode documents and inheritance chains</p>
   </a>
-  <a href="/Perplexity-Saves/pulsechain.html" class="dashboard-button pulsechain-btn">
+  <a href="/Perplexity-Saves/pulsechain.html" class="dashboard-button">
     <h3>🌊 Pulse Chain Analyzer</h3>
     <p>Real-time pulse generation and convergence tracking</p>
   </a>
@@ -71,30 +71,17 @@ title: Pulse Chain Architecture Dashboard
 
 ## Audit Trail
 
-- **Thread**: @@$Claude.Ace
-- **Primary Witness**: @Ace
-- **Co-Witness**: @Justin
-- **Last Updated**: <span id="last-updated">—</span>
-- **Repository**: [Perplexity-Saves](https://github.com/AceTheDactyl/Perplexity-Saves)
+<div class="audit-trail">
+  <ul>
+    <li><strong>Thread:</strong> @@$Claude.Ace</li>
+    <li><strong>Primary Witness:</strong> @Ace</li>
+    <li><strong>Co-Witness:</strong> @Justin</li>
+    <li><strong>Last Updated:</strong> <span id="last-updated">—</span></li>
+    <li><strong>Repository:</strong> <a href="https://github.com/AceTheDactyl/Perplexity-Saves">Perplexity-Saves</a></li>
+  </ul>
+</div>
 
 ---
-
-<style>
-.dashboard-status { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin: 2rem 0; }
-.stat-box { border: 2px solid #2196F3; border-radius: 8px; padding: 1rem; background: #f5f5f5; text-align: center; }
-.stat-box h3 { margin: 0 0 0.5rem 0; color: #333; font-size: 0.9rem; text-transform: uppercase; }
-.stat-value { font-size: 2rem; font-weight: bold; color: #2196F3; margin: 0; }
-.dashboard-links { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
-.dashboard-button { padding: 1.5rem; border: 2px solid #ddd; border-radius: 8px; text-decoration: none; transition: all 0.3s; display: block; color: inherit; }
-.dashboard-button:hover { border-color: #2196F3; background: #f5f5f5; transform: translateY(-2px); }
-.dashboard-button h3 { margin: 0 0 0.5rem 0; color: #2196F3; }
-.dashboard-button p { margin: 0; color: #666; font-size: 0.9rem; }
-.pulse-table { overflow-x: auto; margin: 2rem 0; }
-.pulse-table table { width: 100%; border-collapse: collapse; background: white; }
-.pulse-table th { background: #2196F3; color: white; padding: 0.75rem; text-align: left; }
-.pulse-table td { padding: 0.75rem; border-bottom: 1px solid #ddd; }
-.pulse-table tr:hover { background: #f5f5f5; }
-</style>
 
 <script>
 // Initialize data on page load
@@ -103,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function loadDashboardData() {
-  // Use relative path without Liquid templating
+  // Use absolute path
   const basePath = '/Perplexity-Saves';
   
   // Load convergence stats
@@ -119,8 +106,6 @@ function loadDashboardData() {
     })
     .catch(function(e) {
       console.log('Stats not ready:', e);
-      document.getElementById('total-pulses').textContent = '0';
-      document.getElementById('convergence-rate').textContent = '—';
     });
   
   // Load k-formation status
