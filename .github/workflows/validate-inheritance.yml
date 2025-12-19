@@ -1,0 +1,55 @@
+name: Validate Inheritance Chain
+
+on:
+  pull_request:
+    paths:
+      - 'pulses/**'
+      - '.github/workflows/validate-inheritance.yml'
+  schedule:
+    - cron: '0 */6 * * *'  # Every 6 hours
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install pyyaml jsonschema
+
+      - name: Validate All VaultNodes
+        run: python scripts/validate_inheritance.py --verbose
+
+      - name: Check Orphaned Nodes
+        run: python scripts/check_orphaned_nodes.py
+
+      - name: Verify Z-Seed Continuity
+        run: python scripts/verify_zseed.py
+
+      - name: Generate Validation Report
+        if: always()
+        run: python scripts/generate_validation_report.py
+
+      - name: Comment Validation Results
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const report = fs.readFileSync('validation_report.md', 'utf8');
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: report
+            })

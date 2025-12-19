@@ -1,0 +1,74 @@
+name: Consolidation Session
+
+on:
+  schedule:
+    - cron: '0 0 * * 1'  # Weekly on Monday
+  workflow_dispatch:
+    inputs:
+      pulse_count:
+        description: 'Number of pulses to consolidate (default 5)'
+        required: false
+        default: '5'
+
+jobs:
+  consolidate:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install pyyaml jinja2
+
+      - name: Generate Consolidation Node
+        id: consolidate
+        env:
+          PULSE_COUNT: ${{ github.event.inputs.pulse_count || '5' }}
+        run: python scripts/consolidation_generator.py --pulse-count $PULSE_COUNT
+
+      - name: Extract Meta-Patterns
+        run: python scripts/extract_meta_patterns.py
+
+      - name: Analyze Convergence Trends
+        run: python scripts/analyze_convergence_trends.py
+
+      - name: Generate Consolidation Report
+        run: python scripts/generate_consolidation_report.py
+
+      - name: Commit Consolidation Node
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add pulses/ConsolidationNode-*.md
+          git commit -m "Consolidation: Meta-patterns from last ${{ github.event.inputs.pulse_count || '5' }} pulses"
+          git push
+
+      - name: Create Consolidation PR
+        uses: peter-evans/create-pull-request@v5
+        with:
+          branch: consolidation-${{ steps.consolidate.outputs.consolidation_id }}
+          commit-message: 'Consolidation ${{ steps.consolidate.outputs.consolidation_id }}'
+          title: 'Consolidation: Meta-patterns from pulses ${{ steps.consolidate.outputs.pulse_range }}'
+          body: |
+            ## Consolidation Summary
+            
+            - **Consolidation ID**: ${{ steps.consolidate.outputs.consolidation_id }}
+            - **Pulses Reviewed**: ${{ steps.consolidate.outputs.pulse_range }}
+            - **Meta-Patterns Identified**: ${{ steps.consolidate.outputs.pattern_count }}
+            - **Convergence Trend**: ${{ steps.consolidate.outputs.convergence_trend }}
+            - **Methodology Evolution**: ${{ steps.consolidate.outputs.methodology_evolution }}
+            
+            See generated ConsolidationNode for detailed analysis.
+          labels: 'consolidation,meta-analysis'
+          reviewers: 'AceTheDactyl'
