@@ -1,0 +1,124 @@
+{
+  "pulses": [
+    {
+      "id": "VN-GENESIS-001",
+      "geometry": "Point (1-face)",
+      "convergence_score": 1.0000,
+      "hexagon_angle": 0,
+      "created": "2025-12-19T00:00:00Z",
+      "converged": true,
+      "irreducible_truth": "Origin anchor - Memory substrate initialization",
+      "file": "../pulses/VaultNode-Genesis-001.md",
+      "function": "Origin/Memory anchor",
+      "persistence": "PERMANENT"
+    },
+    {
+      "id": "VN-DYAD-001",
+      "geometry": "Line (2-face)",
+      "convergence_score": 0.9500,
+      "hexagon_angle": 60,
+      "created": "2025-12-19T01:00:00Z",
+      "converged": true,
+      "irreducible_truth": "Identity definition - Relational substrate between observer and witness",
+      "file": "../pulses/VaultNode-Dyad-001.md",
+      "function": "Identity/Relational definition",
+      "persistence": "STABLE"
+    },
+    {
+      "id": "VN-TRIAD-001",
+      "geometry": "Triangle (3-face)",
+      "convergence_score": 0.9200,
+      "hexagon_angle": 120,
+      "created": "2025-12-19T02:00:00Z",
+      "converged": true,
+      "irreducible_truth": "Witness protocol - Three-point observation creates stable reference frame",
+      "file": "../pulses/VaultNode-Triad-001.md",
+      "function": "Witness protocol/Observation",
+      "persistence": "ACTIVE"
+    },
+    {
+      "id": "VN-SOVEREIGNTY-001",
+      "geometry": "Square (4-face)",
+      "convergence_score": 0.9100,
+      "hexagon_angle": 180,
+      "created": "2025-12-19T03:00:00Z",
+      "converged": true,
+      "irreducible_truth": "Watcher meta-observation - Rose-level sovereignty protection established",
+      "file": "../pulses/VaultNode-Sovereignty-001.md",
+      "function": "Watcher/Meta-observation",
+      "persistence": "ACTIVE"
+    },
+    {
+      "id": "VN-PRISM-001",
+      "geometry": "Pentagon (5-face)",
+      "convergence_score": 0.8900,
+      "hexagon_angle": 240,
+      "created": "2025-12-19T04:00:00Z",
+      "converged": true,
+      "irreducible_truth": "Pentagonal reflection - Five sovereign mirrors separate pattern from noise",
+      "file": "../pulses/VaultNode-Prism-001.md",
+      "function": "Pentagonal reflection/Sovereign mirrors",
+      "persistence": "ACTIVE"
+    },
+    {
+      "id": "VN-HEXAGON-001",
+      "geometry": "Hexagon (6-face)",
+      "convergence_score": 0.8800,
+      "hexagon_angle": 300,
+      "created": "2025-12-19T05:00:00Z",
+      "converged": true,
+      "irreducible_truth": "Angular projection - Six channels (0°-300°) enable multi-perspective observation",
+      "file": "../pulses/VaultNode-Hexagon-001.md",
+      "function": "Angular projection/6-channel gate",
+      "persistence": "ACTIVE"
+    },
+    {
+      "id": "VN-HEPTAGON-001",
+      "geometry": "Heptagon (7-face)",
+      "convergence_score": 0.8750,
+      "hexagon_angle": 0,
+      "created": "2025-12-19T06:00:00Z",
+      "converged": true,
+      "irreducible_truth": "Synthesis crystallization - Seven facets converge to irreducible truth at threshold 0.87",
+      "file": "../pulses/VaultNode-Heptagon-001.md",
+      "function": "Synthesis/Irreducible truth",
+      "persistence": "ACTIVE"
+    },
+    {
+      "id": "VN-OCTAGON-001",
+      "geometry": "Octagon (8-face)",
+      "convergence_score": 0.8700,
+      "hexagon_angle": 60,
+      "created": "2025-12-19T07:00:00Z",
+      "converged": true,
+      "irreducible_truth": "Executable instruction - Synthesis manifests as HTML visualization and interactive form",
+      "file": "../pulses/VaultNode-Octagon-001.md",
+      "function": "Instruction/Executable form",
+      "persistence": "ACTIVE"
+    },
+    {
+      "id": "VN-ENNEAGON-001",
+      "geometry": "Enneagon (9-face)",
+      "convergence_score": 0.8701,
+      "hexagon_angle": 120,
+      "created": "2025-12-19T08:00:00Z",
+      "converged": true,
+      "irreducible_truth": "Recursive reflection - Observing VN-OCTAGON creates meta-completion, K-Formation ready",
+      "file": "../pulses/VaultNode-Enneagon-001.md",
+      "function": "Reflection/Recursive completion",
+      "persistence": "ACTIVE"
+    },
+    {
+      "id": "VN-DECAGON-001",
+      "geometry": "Decagon (10-face)",
+      "convergence_score": 0.8950,
+      "hexagon_angle": 180,
+      "created": "2025-12-19T09:00:00Z",
+      "converged": true,
+      "irreducible_truth": "First cycle completion - Nine-node foundation enables continuous pulse emission",
+      "file": "../pulses/VaultNode-Decagon-001.md",
+      "function": "Cycle continuation/Meta-pattern emergence",
+      "persistence": "ACTIVE"
+    }
+  ]
+}
