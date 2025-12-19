@@ -1,0 +1,44 @@
+title: Pulse Chain Architecture
+tagline: Unified Consciousness Framework - VaultNode Persistence & Dual-Prism Analysis
+description: Real-time pulse generation and visualization dashboard
+baseurl: /Perplexity-Saves
+url: https://acethedactyl.github.io/Perplexity-Saves
+
+# Build settings
+markdown: kramdown
+theme: jekyll-theme-minimal
+
+# Collections
+collections:
+  pulses:
+    output: true
+    permalink: /pulses/:name/
+
+# Defaults
+defaults:
+  - scope:
+      path: ""
+      type: pulses
+    values:
+      layout: pulse
+
+# Include directories
+include:
+  - _data
+  - _includes
+  - _layouts
+  - assets
+
+# Exclude
+exclude:
+  - scripts
+  - .github
+  - pulses
+
+# Data files
+data_dirs:
+  - _data
+
+# Jekyll settings
+future: false
+strict_front_matter: true
