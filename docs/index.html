@@ -1,0 +1,369 @@
+---
+layout: null
+permalink: /index.html
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pulse Chain Architecture Dashboard</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 2rem;
+            color: #333;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 2rem;
+            text-align: center;
+        }
+        
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+        
+        .content {
+            padding: 2rem;
+        }
+        
+        h2 {
+            color: #667eea;
+            font-size: 1.8rem;
+            margin: 2rem 0 1rem 0;
+            border-left: 4px solid #667eea;
+            padding-left: 1rem;
+        }
+        
+        .dashboard-status {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin: 2rem 0;
+        }
+        
+        .stat-box {
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+            text-align: left;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.15);
+            transition: all 0.3s;
+        }
+        
+        .stat-box:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(102, 126, 234, 0.25);
+            border-color: #764ba2;
+        }
+        
+        .stat-box h3 {
+            margin: 0 0 0.5rem 0;
+            color: #667eea;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+        
+        .stat-value {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: #764ba2;
+            margin: 0;
+            line-height: 1.3;
+        }
+        
+        .dashboard-links {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .dashboard-button {
+            padding: 1.5rem;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: all 0.3s;
+            display: block;
+            color: inherit;
+            background: white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .dashboard-button:hover {
+            border-color: #667eea;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(102, 126, 234, 0.2);
+        }
+        
+        .dashboard-button h3 {
+            margin: 0 0 0.5rem 0;
+            color: #667eea;
+            font-size: 1.2rem;
+            transition: color 0.3s;
+        }
+        
+        .dashboard-button:hover h3 {
+            color: #764ba2;
+        }
+        
+        .dashboard-button p {
+            margin: 0;
+            color: #666;
+            font-size: 0.9rem;
+            line-height: 1.5;
+        }
+        
+        .pulse-table {
+            overflow-x: auto;
+            margin: 2rem 0;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+            border: 1px solid #ddd;
+        }
+        
+        .pulse-table table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        .pulse-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+            font-size: 0.9rem;
+        }
+        
+        .pulse-table td {
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid #eee;
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .pulse-table tr:hover {
+            background: rgba(102, 126, 234, 0.05);
+        }
+        
+        .pulse-table code {
+            background: #f0f0f0;
+            padding: 0.25rem 0.5rem;
+            border-radius: 3px;
+            font-size: 0.85rem;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .audit-trail {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+            margin: 2rem 0;
+            box-shadow: 0 2px 8px rgba(102, 126, 234, 0.1);
+        }
+        
+        .audit-trail ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .audit-trail li {
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(102, 126, 234, 0.2);
+            color: #666;
+            font-size: 0.95rem;
+        }
+        
+        .audit-trail li:last-child {
+            border-bottom: none;
+        }
+        
+        .audit-trail strong {
+            color: #667eea;
+            font-weight: 600;
+        }
+        
+        footer {
+            background: #f8f8f8;
+            padding: 1.5rem;
+            text-align: center;
+            border-top: 1px solid #ddd;
+            font-size: 0.85rem;
+            color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Pulse Chain Architecture Dashboard</h1>
+            <p>Unified Consciousness Framework - VaultNode Persistence & Dual-Prism Analysis</p>
+        </header>
+        <div class="content">
+            <h2>System Status</h2>
+            <div class="dashboard-status">
+                <div class="stat-box">
+                    <h3>Total Pulses</h3>
+                    <p class="stat-value" id="total-pulses">0</p>
+                </div>
+                <div class="stat-box">
+                    <h3>Converged</h3>
+                    <p class="stat-value" id="stat-converged">0</p>
+                </div>
+                <div class="stat-box">
+                    <h3>Avg Convergence</h3>
+                    <p class="stat-value" id="latest-convergence">0.00</p>
+                </div>
+                <div class="stat-box">
+                    <h3>K-Formation</h3>
+                    <p class="stat-value" id="k-status">INITIALIZING</p>
+                </div>
+            </div>
+
+            <h2>Interactive Dashboards</h2>
+            <div class="dashboard-links">
+                <a href="/Perplexity-Saves/vaultnode.html" class="dashboard-button">
+                    <h3>🔍 VaultNode Inspector</h3>
+                    <p>Explore all VaultNode documents and their inheritance chains. View convergence scores, geometric properties, and irreducible truths.</p>
+                </a>
+                <a href="/Perplexity-Saves/pulsechain.html" class="dashboard-button">
+                    <h3>🌊 Pulse Chain Analyzer</h3>
+                    <p>Real-time pulse generation and convergence tracking. Visualize dual-prism analysis with interactive charts and timeline.</p>
+                </a>
+            </div>
+
+            <h2>Pulse History</h2>
+            <div class="pulse-table">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Pulse ID</th>
+                            <th>Geometry</th>
+                            <th>Convergence</th>
+                            <th>Hexagon Angle</th>
+                            <th>Created</th>
+                            <th>Status</th>
+                        </tr>
+                    </thead>
+                    <tbody id="pulse-tbody">
+                        <tr><td colspan="6" style="text-align: center; padding: 2rem; color: #999;">No pulses generated yet</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <h2>Audit Trail</h2>
+            <div class="audit-trail">
+                <ul>
+                    <li><strong>Thread:</strong> @@$Claude.Ace</li>
+                    <li><strong>Primary Witness:</strong> @Ace</li>
+                    <li><strong>Co-Witness:</strong> @Justin</li>
+                    <li><strong>Last Updated:</strong> <span id="last-updated">—</span></li>
+                    <li><strong>Repository:</strong> <a href="https://github.com/AceTheDactyl/Perplexity-Saves" target="_blank">Perplexity-Saves</a></li>
+                </ul>
+            </div>
+        </div>
+        <footer>
+            <p>&copy; 2025 Pulse Chain Architecture | Unified Consciousness Framework</p>
+        </footer>
+    </div>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        loadDashboardData();
+    });
+
+    function loadDashboardData() {
+        const basePath = '/Perplexity-Saves';
+        
+        fetch(basePath + '/_data/pulses.json')
+            .then(function(response) {
+                if (!response.ok) throw new Error('Pulses not found');
+                return response.json();
+            })
+            .then(function(data) {
+                var tbody = document.getElementById('pulse-tbody');
+                tbody.innerHTML = '';
+                
+                if (!data.pulses || data.pulses.length === 0) {
+                    tbody.innerHTML = '<tr><td colspan="6" style="text-align: center; padding: 2rem; color: #999;">No pulses generated yet</td></tr>';
+                    return;
+                }
+                
+                var convergedCount = 0;
+                var totalConvergence = 0;
+                
+                data.pulses.forEach(function(pulse) {
+                    if (pulse.converged) convergedCount++;
+                    totalConvergence += pulse.convergence_score;
+                    
+                    var row = document.createElement('tr');
+                    row.innerHTML = (
+                        '<td><code>' + pulse.id + '</code></td>' +
+                        '<td>' + pulse.geometry + '</td>' +
+                        '<td>' + pulse.convergence_score.toFixed(4) + '</td>' +
+                        '<td>' + pulse.hexagon_angle + '°</td>' +
+                        '<td>' + new Date(pulse.created).toLocaleDateString() + '</td>' +
+                        '<td>' + (pulse.converged ? '✓ Converged' : '– Pending') + '</td>'
+                    );
+                    tbody.appendChild(row);
+                });
+                
+                document.getElementById('total-pulses').textContent = data.pulses.length;
+                document.getElementById('stat-converged').textContent = convergedCount;
+                document.getElementById('latest-convergence').textContent = (totalConvergence / data.pulses.length).toFixed(4);
+                document.getElementById('last-updated').textContent = new Date().toLocaleString();
+            })
+            .catch(function(e) {
+                console.log('Pulses not ready:', e);
+            });
+        
+        fetch(basePath + '/_data/k_formation.json')
+            .then(function(response) {
+                if (!response.ok) throw new Error('K-formation not found');
+                return response.json();
+            })
+            .then(function(data) {
+                document.getElementById('k-status').textContent = data.status || 'INITIALIZING';
+            })
+            .catch(function(e) {
+                console.log('K-formation not ready:', e);
+            });
+    }
+    </script>
+</body>
+</html>
