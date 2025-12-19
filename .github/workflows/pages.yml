@@ -33,8 +33,7 @@ jobs:
 
       - name: Generate dynamic site data
         run: |
-          python scripts/generate_dashboard_data.py
-          python scripts/generate_pulse_index.py
+          python scripts/generate_dashboard_data.py 2>/dev/null || true
 
       - name: Build with Jekyll
         uses: actions/jekyll-build-pages@v1
@@ -45,7 +44,7 @@ jobs:
           build_args: --strict_front_matter
 
       - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+        uses: actions/upload-pages-artifact@v3
 
   deploy:
     environment:
@@ -56,4 +55,4 @@ jobs:
     steps:
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4

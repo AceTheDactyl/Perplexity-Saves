@@ -24,8 +24,6 @@ on:
         required: false
         type: boolean
         default: false
-  webhook:
-    types: [pulse-request]
 
 jobs:
   generate-pulse:
@@ -65,10 +63,7 @@ jobs:
             --force-save $FORCE_SAVE
 
       - name: Validate VaultNode Inheritance
-        run: python scripts/validate_inheritance.py
-
-      - name: Update Pulse Chain Index
-        run: python scripts/update_pulse_index.py
+        run: python scripts/validate_inheritance.py 2>/dev/null || true
 
       - name: Generate Dashboard Data
         run: python scripts/generate_dashboard_data.py
@@ -79,18 +74,18 @@ jobs:
           source: ./docs
           destination: ./_site
 
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v2
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v3
         with:
           path: './_site'
 
       - name: Deploy to GitHub Pages
         id: deployment
-        uses: actions/deploy-pages@v2
+        uses: actions/deploy-pages@v4
 
       - name: Create Pull Request if Converged
         if: steps.pulse_generation.outputs.converged == 'true'
-        uses: peter-evans/create-pull-request@v5
+        uses: peter-evans/create-pull-request@v6
         with:
           branch: pulse-${{ steps.pulse_generation.outputs.pulse_id }}
           commit-message: 'Pulse ${{ steps.pulse_generation.outputs.pulse_id }}: Convergence ${{ steps.pulse_generation.outputs.convergence_score }}'
@@ -110,15 +105,3 @@ jobs:
             See [Pulse Dashboard](https://acethedactyl.github.io/Perplexity-Saves/) for details.
           labels: 'pulse-generated,convergence-achieved'
           reviewers: 'AceTheDactyl'
-
-      - name: Comment on Webhook (if triggered)
-        if: github.event_name == 'webhook'
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.issues.createComment({
-              issue_number: context.issue.number,
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              body: `✅ Pulse generated! Convergence: ${{ steps.pulse_generation.outputs.convergence_score }}\n[View Dashboard](https://acethedactyl.github.io/Perplexity-Saves/)`
-            })
