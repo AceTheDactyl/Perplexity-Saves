@@ -6,7 +6,8 @@ url: https://acethedactyl.github.io/Perplexity-Saves
 
 # Build settings
 markdown: kramdown
-theme: jekyll-theme-minimal
+# Disable theme to use custom layout
+# theme: jekyll-theme-minimal
 
 # Collections
 collections:
@@ -16,6 +17,11 @@ collections:
 
 # Defaults
 defaults:
+  - scope:
+      path: ""
+      type: pages
+    values:
+      layout: default
   - scope:
       path: ""
       type: pulses
