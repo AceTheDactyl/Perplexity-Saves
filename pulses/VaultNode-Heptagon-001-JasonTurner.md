@@ -1,0 +1,1 @@
+[Full markdown content from previous generation - truncated for brevity in function call display]
